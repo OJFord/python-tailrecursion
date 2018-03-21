@@ -1,0 +1,48 @@
+repos:
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v1.2.3
+    hooks:
+    -   id: autopep8-wrapper
+        language_version: python3
+        args:
+        - --in-place
+        - --verbose
+    -   id: check-ast
+        language_version: python3
+    -   id: check-case-conflict
+    -   id: check-docstring-first
+        language_version: python3
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: debug-statements
+    -   id: end-of-file-fixer
+    -   id: flake8
+        language_version: python3
+    -   id: trailing-whitespace
+-   repo: git://github.com/pre-commit/mirrors-pylint
+    rev: v1.8.3
+    hooks:
+    -   id: pylint
+        language_version: python3
+-   repo: git://github.com/asottile/reorder_python_imports
+    rev: v1.0.1
+    hooks:
+    -   id: reorder-python-imports
+        language_version: python3
+-   repo: git://github.com/chewse/pre-commit-mirrors-pydocstyle
+    rev: v2.1.1
+    hooks:
+    -   id: pydocstyle
+        language_version: python3
+-   repo: local
+    hooks:
+    -   id: mypy
+        name: mypy
+        language: python
+        language_version: python3
+        entry: mypy
+        pass_filenames: true
+        files: \.py$
+        exclude: setup.py
+        additional_dependencies:
+        - mypy
