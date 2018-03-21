@@ -1,0 +1,38 @@
+version: 2
+
+
+jobs:
+  test:
+    docker:
+      - image: circleci/python
+
+    steps:
+      - checkout
+
+      - run:
+          name: Setup virtual environment
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            python -m ensurepip
+            pip install --upgrade pip
+            echo 'source venv/bin/activate' >> "$BASH_ENV"
+
+      - run:
+          name: Lint
+          command: |
+            pip install pre-commit
+            pre-commit install --install-hooks
+            pre-commit run --all-files
+
+      - run:
+          name: Test
+          command: |
+            python setup.py test
+
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - test
